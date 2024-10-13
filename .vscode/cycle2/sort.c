@@ -56,10 +56,10 @@ int main()
             {
                 tempArr[i] = arr[i]; // Directly copy the elements
             }
-            printf("\nOriginal array (Quick Sort): \n");
+            printf("\nOriginal array before Quick Sort: \n");
             printArray(tempArr, n);
             quickSort(tempArr, 0, n - 1);
-            printf("Sorted array (Quick Sort): \n");
+            printf("Sorted array after Quick Sort: \n");
             printArray(tempArr, n);
             break;
         }
@@ -70,10 +70,10 @@ int main()
             {
                 tempArr[i] = arr[i]; // Directly copy the elements
             }
-            printf("\nOriginal array (Merge Sort): \n");
+            printf("\nOriginal array befor Merge Sort: \n");
             printArray(tempArr, n);
             mergeSort(tempArr, 0, n - 1);
-            printf("Sorted array (Merge Sort): \n");
+            printf("Sorted array after Merge Sort: \n");
             printArray(tempArr, n);
             break;
         }
@@ -84,10 +84,10 @@ int main()
             {
                 tempArr[i] = arr[i]; // Directly copy the elements
             }
-            printf("\nOriginal array (Heap Sort): \n");
+            printf("\nOriginal array before Heap Sort: \n");
             printArray(tempArr, n);
             heapSort(tempArr, n);
-            printf("Sorted array (Heap Sort): \n");
+            printf("Sorted array after Heap Sort: \n");
             printArray(tempArr, n);
             break;
         }
