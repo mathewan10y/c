@@ -3,21 +3,18 @@
 
 #define MAX_VERTICES 100
 
-// Structure to represent a node in the adjacency list
 typedef struct Node
 {
     int vertex;
     struct Node *next;
 } Node;
 
-// Structure to represent the adjacency list
 typedef struct Graph
 {
     Node *head[MAX_VERTICES];
     int numVertices;
 } Graph;
 
-// Function to create a new node
 Node *createNode(int vertex)
 {
     Node *newNode = (Node *)malloc(sizeof(Node));
@@ -26,7 +23,6 @@ Node *createNode(int vertex)
     return newNode;
 }
 
-// Function to initialize the graph
 Graph *createGraph(int vertices)
 {
     Graph *graph = (Graph *)malloc(sizeof(Graph));
@@ -38,7 +34,6 @@ Graph *createGraph(int vertices)
     return graph;
 }
 
-// Function to add an edge to the graph (undirected)
 void addEdge(Graph *graph, int src, int dest)
 {
     Node *newNode = createNode(dest);
@@ -50,7 +45,6 @@ void addEdge(Graph *graph, int src, int dest)
     graph->head[dest] = newNode;
 }
 
-// Function to display the graph
 void displayGraph(Graph *graph)
 {
     for (int i = 0; i < graph->numVertices; i++)
@@ -66,7 +60,6 @@ void displayGraph(Graph *graph)
     }
 }
 
-// Function for DFS traversal
 void DFSUtil(Graph *graph, int vertex, int visited[])
 {
     visited[vertex] = 1;
@@ -84,7 +77,6 @@ void DFSUtil(Graph *graph, int vertex, int visited[])
     }
 }
 
-// Function to perform DFS
 void DFS(Graph *graph)
 {
     int visited[MAX_VERTICES] = {0};
@@ -97,7 +89,6 @@ void DFS(Graph *graph)
     }
 }
 
-// Function to perform BFS
 void BFS(Graph *graph, int startVertex)
 {
     int visited[MAX_VERTICES] = {0};
@@ -126,7 +117,6 @@ void BFS(Graph *graph, int startVertex)
     }
 }
 
-// Main function
 int main()
 {
     int vertices = 5;
@@ -150,8 +140,6 @@ int main()
     printf("BFS traversal starting from vertex 0:\n");
     BFS(graph, 0);
     printf("\n");
-
-    // Free memory (not implemented for simplicity)
 
     return 0;
 }
