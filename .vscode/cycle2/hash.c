@@ -4,7 +4,6 @@
 
 #define TABLE_SIZE 10
 
-// Structure for a hash table node
 typedef struct Node
 {
     char key[100];
@@ -12,13 +11,11 @@ typedef struct Node
     struct Node *next;
 } Node;
 
-// Structure for the hash table
 typedef struct HashTable
 {
     Node **table;
 } HashTable;
 
-// Function prototypes
 HashTable *createHashTable();
 unsigned int hash(char *key);
 void insert(HashTable *ht, char *key, int value);
@@ -86,7 +83,6 @@ int main()
     return 0;
 }
 
-// Function to create a hash table
 HashTable *createHashTable()
 {
     HashTable *ht = (HashTable *)malloc(sizeof(HashTable));
@@ -98,7 +94,6 @@ HashTable *createHashTable()
     return ht;
 }
 
-// Hash function
 unsigned int hash(char *key)
 {
     unsigned int hashValue = 0;
@@ -109,7 +104,6 @@ unsigned int hash(char *key)
     return hashValue % TABLE_SIZE;
 }
 
-// Function to insert a key-value pair into the hash table
 void insert(HashTable *ht, char *key, int value)
 {
     unsigned int index = hash(key);
@@ -118,12 +112,10 @@ void insert(HashTable *ht, char *key, int value)
     newNode->value = value;
     newNode->next = NULL;
 
-    // Insert at the beginning of the linked list
     newNode->next = ht->table[index];
     ht->table[index] = newNode;
 }
 
-// Function to search for a key in the hash table
 int search(HashTable *ht, char *key)
 {
     unsigned int index = hash(key);
@@ -136,10 +128,9 @@ int search(HashTable *ht, char *key)
         }
         current = current->next;
     }
-    return -1; // Key not found
+    return -1;
 }
 
-// Function to delete a key-value pair from the hash table
 void delete(HashTable *ht, char *key)
 {
     unsigned int index = hash(key);
@@ -152,7 +143,7 @@ void delete(HashTable *ht, char *key)
         {
             if (prev == NULL)
             {
-                // Deleting the first node in the list
+
                 ht->table[index] = current->next;
             }
             else
@@ -169,7 +160,6 @@ void delete(HashTable *ht, char *key)
     printf("Key '%s' not found.\n", key);
 }
 
-// Function to display the hash table
 void display(HashTable *ht)
 {
     for (int i = 0; i < TABLE_SIZE; i++)
@@ -188,7 +178,6 @@ void display(HashTable *ht)
     }
 }
 
-// Function to free the memory used by the hash table
 void freeHashTable(HashTable *ht)
 {
     for (int i = 0; i < TABLE_SIZE; i++)
