@@ -15,8 +15,7 @@ Node *createNode(int value)
     if (newNode == NULL)
     {
         printf("Memory allocation failed\n");
-        exit(1);
-    }
+        }
     newNode->value = value;
     newNode->left = NULL;
     newNode->right = NULL;

@@ -140,7 +140,7 @@ int main()
 
     // Build the binary tree from the infix expression
     Node *expressionTree = buildTree(infix);
-
+    display(expressionTree, 0);
     // Post-order traversal for postfix
     printf("Postfix expression: ");
     postOrder(expressionTree);
@@ -152,4 +152,31 @@ int main()
     printf("\n");
 
     return 0;
+}
+
+void display(Node *node, int level)
+{
+    if (node == NULL)
+    {
+        return;
+    }
+
+    // Print right child first
+    display(node->right, level + 1);
+
+    // Print current node value with indentation
+    for (int i = 0; i < level; i++)
+    {
+        printf("    "); // 4 spaces for each level
+    }
+
+    // Print the node's value
+    if (level > 0)
+    {
+        printf("|-- "); // Indicate connection with vertical bar
+    }
+    printf("%c\n", node->value);
+
+    // Print left child connection
+    display(node->left, level + 1);
 }
