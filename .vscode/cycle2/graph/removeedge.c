@@ -45,6 +45,39 @@ void addEdge(Graph *graph, int src, int dest)
     graph->head[dest] = newNode;
 }
 
+// Helper function to remove a single directed edge from src to dest
+void removeDirectedEdge(Graph *graph, int src, int dest)
+{
+    Node *temp = graph->head[src];
+    Node *prev = NULL;
+
+    while (temp != NULL && temp->vertex != dest)
+    {
+        prev = temp;
+        temp = temp->next;
+    }
+
+    if (temp != NULL)
+    {
+        if (prev == NULL)
+        {
+            graph->head[src] = temp->next;
+        }
+        else
+        {
+            prev->next = temp->next;
+        }
+        free(temp);
+    }
+}
+
+// Function to remove an undirected edge
+void removeEdge(Graph *graph, int src, int dest)
+{
+    removeDirectedEdge(graph, src, dest);
+    removeDirectedEdge(graph, dest, src);
+}
+
 void displayGraph(Graph *graph)
 {
     for (int i = 0; i < graph->numVertices; i++)
@@ -57,63 +90,6 @@ void displayGraph(Graph *graph)
             temp = temp->next;
         }
         printf("\n");
-    }
-}
-
-void DFSUtil(Graph *graph, int vertex, int visited[])
-{
-    visited[vertex] = 1;
-    printf("%d ", vertex);
-
-    Node *temp = graph->head[vertex];
-    while (temp)
-    {
-        int adjVertex = temp->vertex;
-        if (!visited[adjVertex])
-        {
-            DFSUtil(graph, adjVertex, visited);
-        }
-        temp = temp->next;
-    }
-}
-
-void DFS(Graph *graph)
-{
-    int visited[MAX_VERTICES] = {0};
-    for (int i = 0; i < graph->numVertices; i++)
-    {
-        if (!visited[i])
-        {
-            DFSUtil(graph, i, visited);
-        }
-    }
-}
-
-void BFS(Graph *graph, int startVertex)
-{
-    int visited[MAX_VERTICES] = {0};
-    int queue[MAX_VERTICES];
-    int front = 0, rear = 0;
-
-    visited[startVertex] = 1;
-    queue[rear++] = startVertex;
-
-    while (front < rear)
-    {
-        int currentVertex = queue[front++];
-        printf("%d ", currentVertex);
-
-        Node *temp = graph->head[currentVertex];
-        while (temp)
-        {
-            int adjVertex = temp->vertex;
-            if (!visited[adjVertex])
-            {
-                visited[adjVertex] = 1;
-                queue[rear++] = adjVertex;
-            }
-            temp = temp->next;
-        }
     }
 }
 
@@ -139,13 +115,12 @@ int main()
     printf("\nGraph representation (Adjacency List):\n");
     displayGraph(graph);
 
-    printf("\nDFS traversal:\n");
-    DFS(graph);
-    printf("\n");
+    printf("Enter an edge to remove (src dest): ");
+    scanf("%d %d", &src, &dest);
+    removeEdge(graph, src, dest);
 
-    printf("BFS traversal starting from vertex 0:\n");
-    BFS(graph, 0);
-    printf("\n");
+    printf("\nGraph after removing the edge:\n");
+    displayGraph(graph);
 
     return 0;
 }
